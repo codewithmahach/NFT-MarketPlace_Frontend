@@ -119,16 +119,36 @@ export function resolveIPFS(uri, category = "") {
     return getCategoryFallbackImage(category);
   }
   const cleanUri = uri.trim();
+
+  // 1. Data URI (Base64 image)
+  if (cleanUri.startsWith("data:image/")) {
+    return cleanUri;
+  }
+
+  const liveBackend = (import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/api\/?$/, "");
+
+  // 2. Relative uploads path
   if (cleanUri.startsWith("/uploads/")) {
-    const backendOrigin = (import.meta.env.VITE_API_URL || "http://localhost:5000/api").replace(/\/api\/?$/, "");
-    return `${backendOrigin}${cleanUri}`;
+    return `${liveBackend}${cleanUri}`;
   }
-  if (cleanUri.startsWith("/images/categories/") || cleanUri.startsWith("/images/")) {
-    return getCategoryFallbackImage(category);
+
+  // 3. Localhost ports from Render migration (e.g. http://localhost:10000/uploads/...)
+  if (cleanUri.includes("localhost:10000/uploads/") || cleanUri.includes("localhost:5000/uploads/")) {
+    if (liveBackend && !liveBackend.includes("localhost")) {
+      return cleanUri.replace(/http:\/\/localhost:\d+/, liveBackend);
+    }
   }
+
+  // 4. IPFS URI
   if (cleanUri.startsWith("ipfs://")) {
     const hash = cleanUri.replace("ipfs://", "");
     return `https://gateway.pinata.cloud/ipfs/${hash}`;
   }
+
+  // 5. Category static fallback (only if strictly matches /images/categories/)
+  if (cleanUri.startsWith("/images/categories/") || cleanUri.startsWith("/images/")) {
+    return getCategoryFallbackImage(category);
+  }
+
   return cleanUri;
 }
