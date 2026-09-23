@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <defs>
+    <linearGradient id="logoIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#ff3877" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="60%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#ff3877" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(10, 10)">
+    <rect width="60" height="60" rx="16" fill="url(#logoIconGrad)" />
+    <path d="M30 11 L46 21 L46 39 L30 49 L14 39 L14 21 Z" fill="#ffffff" fill-opacity="0.95" />
+    <circle cx="30" cy="23" r="4.5" fill="#38bdf8" />
+    <circle cx="21.5" cy="37" r="4.5" fill="#a855f7" />
+    <circle cx="38.5" cy="37" r="4.5" fill="#ff3877" />
+    <path d="M30 23 L21.5 37 M30 23 L38.5 37 M21.5 37 L38.5 37" stroke="#0f172a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  <!-- Brand Text -->
+  <text x="85" y="48" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="30" fill="url(#textGrad)" letter-spacing="-0.5">
+    Chain<tspan fill="#ff3877">Art</tspan>
+  </text>
+  <text x="86" y="64" font-family="'Inter', sans-serif" font-weight="600" font-size="9" fill="#64748b" letter-spacing="1.5">
+    NFT MARKETPLACE
+  </text>
+</svg>
